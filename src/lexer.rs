@@ -1,6 +1,6 @@
 use std::fmt;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum Token {
     Arabic(i8),
     Roman(i8),
@@ -9,6 +9,30 @@ pub enum Token {
     Multiplication,
     Division,
     Unknown(String)
+}
+
+impl fmt::Display for Token {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Token::Arabic(number) => write!(f, "{}", number),
+            Token::Roman(1) => write!(f, "I"),
+            Token::Roman(2) => write!(f, "II"),
+            Token::Roman(3) => write!(f, "III"),
+            Token::Roman(4) => write!(f, "IV"),
+            Token::Roman(5) => write!(f, "V"),
+            Token::Roman(6) => write!(f, "VI"),
+            Token::Roman(7) => write!(f, "VII"),
+            Token::Roman(8) => write!(f, "VIII"),
+            Token::Roman(9) => write!(f, "IX"),
+            Token::Roman(10) => write!(f, "X"),
+            Token::Plus => write!(f, "+"),
+            Token::Minus => write!(f, "-"),
+            Token::Multiplication => write!(f, "*"),
+            Token::Division => write!(f, "/"),
+            Token::Unknown(token) => write!(f, "{}", token),
+            _ => write!(f, "unexpected token"),
+        }
+    }
 }
 
 pub fn to_token(string: &str) -> Result<Token, LexerError> {
