@@ -1,6 +1,7 @@
 use crate::lexer::Token;
 
 use std::fmt;
+use std::error::Error;
 
 #[derive(Debug, PartialEq)]
 pub struct Calculation {
@@ -48,6 +49,8 @@ pub enum ParserError {
     InvalidNumberOfArgumetns(usize),
     InvalidArgument(Token, String),
 }
+
+impl Error for ParserError { }
 
 impl fmt::Display for ParserError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {

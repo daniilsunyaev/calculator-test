@@ -1,4 +1,5 @@
 use std::fmt;
+use std::error::Error;
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum Token {
@@ -78,6 +79,8 @@ pub enum LexerError {
     NumberIsNotAllowed(i8),
     UnknownToken(String),
 }
+
+impl Error for LexerError { }
 
 impl fmt::Display for LexerError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
